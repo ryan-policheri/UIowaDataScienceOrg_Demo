@@ -1,0 +1,14 @@
+Web API Base Link: https://itsnt2259.iowa.uiowa.edu/piwebapi
+Web API Documentation: https://itsnt2259.iowa.uiowa.edu/piwebapi/help
+
+Main Campus Buildings Navigation Tree: 
+https://itsnt2259.iowa.uiowa.edu/piwebapi/elements/F1EmAVYciAZHVU6DzQbJjxTxWwGA33F49J6RGuHFS_ZKR9xgSVRTTlQyMjU5XFVJLUVORVJHWVxNQUlOIENBTVBVUw/elements
+
+Utilities Systems Navigation Tree: 
+https://itsnt2259.iowa.uiowa.edu/piwebapi/assetdatabases/F1RDAVYciAZHVU6DzQbJjxTxWw5DC-dOxg402kdq1pvYnZFQSVRTTlQyMjU5XFVJLVVUSUxJVElFUw/elements
+
+
+WEB IDS:
+ -Schaeffer Hall Electric Power: F1AbEAVYciAZHVU6DzQbJjxTxWw_E_fKY9J6RGuHFS_ZKR9xgqgO-CVKTR1YoEwPKZJbPnwSVRTTlQyMjU5XFVJLUVORVJHWVxNQUlOIENBTVBVU1xTQ0hBRUZGRVIgSEFMTHxFTCBQT1dFUg
+ -Schaeffer Hall Steam Power: F1AbEAVYciAZHVU6DzQbJjxTxWw_E_fKY9J6RGuHFS_ZKR9xgsGEGEIKioF8UMkXwaeK6eQSVRTTlQyMjU5XFVJLUVORVJHWVxNQUlOIENBTVBVU1xTQ0hBRUZGRVIgSEFMTHxTVCBQT1dFUg
+ -Schaeffer Hall Chilled Water Power: F1AbEAVYciAZHVU6DzQbJjxTxWw_E_fKY9J6RGuHFS_ZKR9xg0C85gn786lU03BVwI5i3SQSVRTTlQyMjU5XFVJLUVORVJHWVxNQUlOIENBTVBVU1xTQ0hBRUZGRVIgSEFMTHxDVyBQT1dFUg
