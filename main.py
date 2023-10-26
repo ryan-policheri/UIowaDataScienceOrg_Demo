@@ -23,8 +23,8 @@ def to_local_time(timestamp_string):
     return utc_datetime + offset
 
 def get_hourly_data_from_pi(web_id, user_name, password):
-    url = "https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/" + web_id + "/summary?startTime=1/1/2017 00:00:00&endTime=10/24/2023 16:00:00&summaryDuration=1h&summaryType=average&timeZone=Central Standard Time"
-    response = requests.get(url, auth=(user_name,password))
+    url = "https://itsnt2259.iowa.uiowa.edu/piwebapi/streams/" + web_id + "/summary?startTime=1/1/2017 00:00:00&endTime=10/25/2023 16:00:00&summaryDuration=1h&summaryType=average&timeZone=Central Standard Time"
+    response = requests.get(url, auth=(user_name,password), verify=False)
     body = response.json()
     tuples = []
     for item in body["Items"]:
@@ -39,6 +39,34 @@ def get_hourly_data_from_pi(web_id, user_name, password):
 def main():
     user_name = input("Enter HawkId Username: ")
     password = pyautogui.password(text='Enter HawkId password', title='Password Entry Window', default='', mask='*')
+
+    steam_data = get_hourly_data_from_pi(schaeffer_hall_steam_power_web_id, user_name, password)
+    #print("Amount of bad data points: " + str(Enumerable(steam_data).where(lambda x: x[1] == -1).count()))
+    #steam_data = Enumerable(steam_data).order_by_descending(lambda x: x[1]).take(20).to_list()
+    #print(tabulate.tabulate(steam_data, headers=["Timestamp", "Value"]))
+
+    chilled_water_data = get_hourly_data_from_pi(schaeffer_hall_chilled_water_power_web_id, user_name, password)
+    #print("Amount of bad data points: " + str(Enumerable(chilled_water_data).where(lambda x: x[1] == -1).count()))
+    #chilled_water_data = Enumerable(chilled_water_data).order_by_descending(lambda x: x[1]).take(20).to_list()
+    #print(tabulate.tabulate(chilled_water_data, headers=["Timestamp", "Value"]))
+
+    electric_data = get_hourly_data_from_pi(schaeffer_hall_electric_power_web_id, user_name, password)
+    #electric_data = Enumerable(electric_data).select(lambda x: (x[0], x[1]*3600))
+    #print("Amount of bad data points: " + str(Enumerable(electric_data).where(lambda x: x[1] == -1).count()))
+    #electric_data = Enumerable(electric_data).order_by_descending(lambda x: x[1]).take(20).to_list()
+    #print(tabulate.tabulate(electric_data, headers=["Timestamp", "Value"]))
+
+    new_tuples = []
+    for i in range(Enumerable(electric_data).count()):
+        elec_tuple = electric_data[i]
+        steam_tuple = steam_data[i]
+        chilled_water_tuple = chilled_water_data[i]
+        new_tuple = (chilled_water_tuple[0], (elec_tuple[1] * 3412.14) / 1000000, steam_tuple[1], chilled_water_tuple[1])
+        new_tuples.append(new_tuple)
+
+    new_tuples = Enumerable(new_tuples).order_by_descending(lambda x : x[1] + x[2] + x[3]).take(20)
+    print(tabulate.tabulate(new_tuples, headers=["Timestamp", "Electric_Value", "Steam_Value", "Chilled_Water_Value"]))
+
 
 if __name__ == '__main__':
     main()
